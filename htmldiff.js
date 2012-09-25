@@ -5,7 +5,7 @@
  * 注1：现有版本还未对执行效率进行优化；
  * 注2：原始算法来自于网络:http://www.rohland.co.za/index.php/2009/10/31/csharp-html-diff-algorithm/
  * 注3：效率真低啊..........╮(╯▽╰)╭
- * @author zhoujq | zhoujq@rd.netease.com
+ * @author zhoujq | http://weibo.com/buxiaodewa
  */
 (function() {
     var root = self;
