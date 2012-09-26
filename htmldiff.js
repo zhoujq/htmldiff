@@ -10,14 +10,6 @@
 (function() {
     var root = self;
     /**
-     * 针对高级浏览器开启webWorker支持
-     */
-    onmessage = function (evt) {
-        var data = evt.data;
-        var diff = root.getHTMLDiff(data.oldVersion, data.newVersion);
-        postMessage(diff);
-    };
-    /**
      * 匹配描述块，一个用来表示相同内容块在新旧文档内位置的描述对象
      * @param {Number} startInOld [相同部分在旧文档中的起始位置]
      * @param {Number} startInNew [相同部分在新文档中的起始位置]
@@ -313,7 +305,19 @@
             return this.isOpeningTag(item) ? 1 : this.isClosingTag(item) ? 2 : 0;
         }
     };
+
     root.getHTMLDiff = function(oldVersion, newVersion) {
         return new DiffBuilder(oldVersion, newVersion).build();
     };
+
+    /**
+     * 针对高级浏览器开启webWorker支持
+     */
+    if(typeof postMessage === "function"){
+        onmessage = function (evt) {
+            var data = evt.data;
+            var diff = getHTMLDiff(data.oldVersion, data.newVersion);
+            postMessage(diff);
+        };
+    }
 })();
